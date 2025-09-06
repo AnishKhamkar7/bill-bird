@@ -1,3 +1,5 @@
+"use client";
+
 import { WaitlistForm } from "@/app/components/waitlist-form";
 import { FeatureCard } from "@/app/components/feature-card";
 import { Button } from "@/components/ui/button";
@@ -24,32 +26,15 @@ export default function HomePage() {
                 BillBird
               </span>
             </div>
-            <nav className="hidden md:flex items-center space-x-8">
-              <a
-                href="#features"
-                className="text-secondary hover:text-foreground transition-colors"
-              >
-                Features
-              </a>
-              <a
-                href="#about"
-                className="text-secondary hover:text-foreground transition-colors"
-              >
-                About
-              </a>
-              <a
-                href="#contact"
-                className="text-secondary hover:text-foreground transition-colors"
-              >
-                Contact
-              </a>
-            </nav>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted py-20 sm:py-32">
+      <section
+        id="waitlist"
+        className="relative overflow-hidden bg-gradient-to-b from-background to-muted py-20 sm:py-32"
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl text-balance animate-fade-in">
@@ -292,6 +277,11 @@ export default function HomePage() {
               <Button
                 size="lg"
                 className="bg-accent hover:bg-accent/90 text-accent-foreground"
+                onClick={() =>
+                  document
+                    .getElementById("waitlist")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
               >
                 Join Waitlist <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
