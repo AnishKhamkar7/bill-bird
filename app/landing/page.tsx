@@ -74,7 +74,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 sm:py-32 bg-background">
+      <section id="about" className="py-20 sm:py-32 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl text-balance">
@@ -124,133 +124,153 @@ export default function HomePage() {
       </section>
 
       {/* Workflow Creation Section */}
-      <section className="py-20 sm:py-32 bg-muted">
+      <section id="features" className="py-20 sm:py-32 bg-muted">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl text-balance">
-              Create Your Own Workflows
+              Create Your Workflows and Track Expenses
             </h2>
             <p className="mt-4 text-lg text-secondary text-pretty">
-              The key differentiator: Build custom workflows and get tool
-              recommendations tailored to your exact process.
+              Build custom workflows and get tool recommendations tailored to
+              your exact process.
             </p>
           </div>
 
-          {/* Workflow Visual */}
-          <div className="mx-auto max-w-6xl">
-            <div className="relative bg-card rounded-2xl p-8 border border-border">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-                {/* Workflow Nodes */}
-                <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
-                  {/* Start Node */}
-                  <div className="relative">
-                    <div className="w-24 h-24 bg-accent/20 border-2 border-accent rounded-xl flex items-center justify-center">
-                      <Zap className="h-8 w-8 text-accent" />
-                    </div>
-                    <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm font-medium text-foreground whitespace-nowrap">
-                      Start Project
-                    </div>
-                    {/* Connection Line */}
-                    <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-accent/50"></div>
-                  </div>
-
-                  {/* Design Node */}
-                  <div className="relative">
-                    <div className="w-24 h-24 bg-chart-2/20 border-2 border-chart-2 rounded-xl flex items-center justify-center">
-                      <Target className="h-8 w-8 text-chart-2" />
-                    </div>
-                    <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm font-medium text-foreground whitespace-nowrap">
-                      UI/UX Design
-                    </div>
-                    {/* Connection Line */}
-                    <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-chart-2/50"></div>
-                  </div>
-
-                  {/* Development Node */}
-                  <div className="relative">
-                    <div className="w-24 h-24 bg-chart-3/20 border-2 border-chart-3 rounded-xl flex items-center justify-center">
-                      <Workflow className="h-8 w-8 text-chart-3" />
-                    </div>
-                    <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm font-medium text-foreground whitespace-nowrap">
-                      Development
-                    </div>
-                    {/* Connection Line */}
-                    <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-chart-3/50"></div>
-                  </div>
-
-                  {/* Deploy Node */}
-                  <div className="relative">
-                    <div className="w-24 h-24 bg-chart-4/20 border-2 border-chart-4 rounded-xl flex items-center justify-center">
-                      <Bird className="h-8 w-8 text-chart-4" />
-                    </div>
-                    <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm font-medium text-foreground whitespace-nowrap">
-                      Deploy
-                    </div>
-                  </div>
+          <div className="mx-auto max-w-5xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              {/* UI/UX Block */}
+              <div className="bg-card rounded-xl p-6 border border-border hover:border-accent/50 transition-colors group">
+                <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/30 transition-colors">
+                  <Target className="h-6 w-6 text-accent" />
                 </div>
-
-                {/* Arrow */}
-                <div className="flex items-center">
-                  <ArrowRight className="h-8 w-8 text-accent" />
-                </div>
-
-                {/* Recommendations Panel */}
-                <div className="bg-background rounded-xl p-6 border border-border min-w-[280px]">
-                  <h3 className="text-lg font-semibold text-foreground mb-4">
-                    Recommended Tools
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 p-2 bg-muted rounded-lg">
-                      <div className="w-8 h-8 bg-accent/20 rounded-md flex items-center justify-center">
-                        <span className="text-xs font-bold text-accent">F</span>
-                      </div>
-                      <div>
-                        <div className="text-sm font-medium text-foreground">
-                          Figma
-                        </div>
-                        <div className="text-xs text-secondary">
-                          Design & Prototyping
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 p-2 bg-muted rounded-lg">
-                      <div className="w-8 h-8 bg-chart-2/20 rounded-md flex items-center justify-center">
-                        <span className="text-xs font-bold text-chart-2">
-                          V
-                        </span>
-                      </div>
-                      <div>
-                        <div className="text-sm font-medium text-foreground">
-                          Vercel
-                        </div>
-                        <div className="text-xs text-secondary">Deployment</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 p-2 bg-muted rounded-lg">
-                      <div className="w-8 h-8 bg-chart-3/20 rounded-md flex items-center justify-center">
-                        <span className="text-xs font-bold text-chart-3">
-                          N
-                        </span>
-                      </div>
-                      <div>
-                        <div className="text-sm font-medium text-foreground">
-                          Next.js
-                        </div>
-                        <div className="text-xs text-secondary">Framework</div>
-                      </div>
-                    </div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  UI/UX Designer
+                </h3>
+                <p className="text-sm text-secondary mb-4">
+                  Design-focused tools and creative workflows
+                </p>
+                <div className="space-y-2">
+                  <div className="text-xs text-accent font-medium">
+                    Recommended:
+                  </div>
+                  <div className="text-xs text-secondary">
+                    Figma, Adobe Creative Suite, Sketch
                   </div>
                 </div>
               </div>
 
-              {/* Workflow Description */}
-              <div className="mt-12 text-center">
-                <p className="text-secondary text-pretty max-w-2xl mx-auto">
-                  Define your workflow steps, and BillBird intelligently
-                  suggests tools for each phase. Track costs, get renewal
-                  alerts, and discover better alternatives - all tailored to
-                  your specific process.
+              {/* Backend Block */}
+              <div className="bg-card rounded-xl p-6 border border-border hover:border-accent/50 transition-colors group">
+                <div className="w-12 h-12 bg-chart-2/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-chart-2/30 transition-colors">
+                  <Workflow className="h-6 w-6 text-chart-2" />
+                </div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  Backend Developer
+                </h3>
+                <p className="text-sm text-secondary mb-4">
+                  Server-side and infrastructure tools
                 </p>
+                <div className="space-y-2">
+                  <div className="text-xs text-chart-2 font-medium">
+                    Recommended:
+                  </div>
+                  <div className="text-xs text-secondary">
+                    AWS, Docker, MongoDB Atlas
+                  </div>
+                </div>
+              </div>
+
+              {/* Indie Hacker Block */}
+              <div className="bg-card rounded-xl p-6 border border-border hover:border-accent/50 transition-colors group">
+                <div className="w-12 h-12 bg-chart-3/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-chart-3/30 transition-colors">
+                  <Zap className="h-6 w-6 text-chart-3" />
+                </div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  Indie Hacker
+                </h3>
+                <p className="text-sm text-secondary mb-4">
+                  Solo entrepreneur and startup tools
+                </p>
+                <div className="space-y-2">
+                  <div className="text-xs text-chart-3 font-medium">
+                    Recommended:
+                  </div>
+                  <div className="text-xs text-secondary">
+                    Vercel, Stripe, PostHog
+                  </div>
+                </div>
+              </div>
+
+              {/* Full-Stack Block */}
+              <div className="bg-card rounded-xl p-6 border border-border hover:border-accent/50 transition-colors group">
+                <div className="w-12 h-12 bg-chart-4/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-chart-4/30 transition-colors">
+                  <Users className="h-6 w-6 text-chart-4" />
+                </div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  Full-Stack
+                </h3>
+                <p className="text-sm text-secondary mb-4">
+                  End-to-end development workflows
+                </p>
+                <div className="space-y-2">
+                  <div className="text-xs text-chart-4 font-medium">
+                    Recommended:
+                  </div>
+                  <div className="text-xs text-secondary">
+                    Cursor, Supabase, Claude
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Benefits Section */}
+            <div className="bg-card rounded-xl p-8 border border-border">
+              <div className="text-center mb-8">
+                <h3 className="text-xl font-semibold text-foreground mb-2">
+                  Why Workflow-Aware Matters
+                </h3>
+                <p className="text-secondary">
+                  Get recommendations that actually fit your development style
+                  and needs
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center mx-auto mb-3">
+                    <Bell className="h-5 w-5 text-accent" />
+                  </div>
+                  <h4 className="font-medium text-foreground mb-2">
+                    Smart Filtering
+                  </h4>
+                  <p className="text-sm text-secondary">
+                    Only see tools relevant to your workflow type
+                  </p>
+                </div>
+
+                <div className="text-center">
+                  <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center mx-auto mb-3">
+                    <Bird className="h-5 w-5 text-accent" />
+                  </div>
+                  <h4 className="font-medium text-foreground mb-2">
+                    Cost Optimization
+                  </h4>
+                  <p className="text-sm text-secondary">
+                    Identify overlapping tools and save money
+                  </p>
+                </div>
+
+                <div className="text-center">
+                  <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center mx-auto mb-3">
+                    <Target className="h-5 w-5 text-accent" />
+                  </div>
+                  <h4 className="font-medium text-foreground mb-2">
+                    Curated Discovery
+                  </h4>
+                  <p className="text-sm text-secondary">
+                    Find new tools that complement your stack
+                  </p>
+                </div>
               </div>
             </div>
           </div>
