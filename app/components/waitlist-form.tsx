@@ -1,67 +1,82 @@
 "use client";
 
 import type React from "react";
-
 import { useState } from "react";
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Twitter, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+// Zod schema: at least one of email or twitterUsername must be filled
+const waitlistSchema = z
+  .object({
+    email: z.string().email("Invalid email").optional().or(z.literal("")),
+    twitterUsername: z
+      .string()
+      .min(2, "Username too short")
+      .optional()
+      .or(z.literal("")),
+  })
+  .refine((data) => data.email || data.twitterUsername, {
+    message: "Please provide either an email or a Twitter username.",
+  });
 
 export function WaitlistForm() {
   const [email, setEmail] = useState("");
   const [twitterUsername, setTwitterUsername] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
+  const formUrl = process.env.NEXT_PUBLIC_FORM_URL as string;
+  const emailCol = process.env.NEXT_PUBLIC_EMAIL_COL as string;
+  const usernameCol = process.env.NEXT_PUBLIC_USERNAME_COL as string;
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+
+    const result = waitlistSchema.safeParse({ email, twitterUsername });
+    if (!result.success) {
+      console.log(JSON.parse(result.error.message)[0].message);
+      setError(JSON.parse(result.error.message)[0].message);
+      return;
+    }
+
     setIsLoading(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    setIsLoading(false);
-    setIsSubmitted(true);
-
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
+    try {
+      await fetch(formUrl, {
+        method: "POST",
+        mode: "no-cors", // required for Google Forms
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          [emailCol]: email,
+          [usernameCol]: twitterUsername,
+        }).toString(),
+      });
+      toast.success("CHIRPPPP!!! You have been added to Wait List");
       setEmail("");
       setTwitterUsername("");
-    }, 3000);
+    } catch (err) {
+      console.log("Error:", err);
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
-
-  if (isSubmitted) {
-    return (
-      <Card className="mx-auto max-w-md animate-fade-in">
-        <CardContent className="p-6 text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent/10">
-            <Mail className="h-6 w-6 text-accent" />
-          </div>
-          <h3 className="text-lg font-semibold text-foreground">
-            You're on the list!
-          </h3>
-          <p className="mt-2 text-sm text-secondary">
-            We'll notify you when SubTracker is ready for early access.
-          </p>
-        </CardContent>
-      </Card>
-    );
-  }
 
   return (
     <Card className="mx-auto max-w-md">
       <CardContent className="p-6">
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5 text-left">
           <div className="space-y-2">
             <label
               htmlFor="email"
-              className="text-sm font-medium text-foreground"
+              className="text-sm font-medium text-foreground "
             >
               Email Address
             </label>
-            <div className="relative">
+            <div className="relative py-2">
               <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-secondary" />
               <Input
                 id="email"
@@ -70,7 +85,6 @@ export function WaitlistForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="pl-10"
-                required
               />
             </div>
           </div>
@@ -80,10 +94,9 @@ export function WaitlistForm() {
               htmlFor="twitter"
               className="text-sm font-medium text-foreground"
             >
-              X (Twitter) Username{" "}
-              <span className="text-secondary">(optional)</span>
+              X (Twitter) Username
             </label>
-            <div className="relative">
+            <div className="relative py-2">
               <Twitter className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-secondary" />
               <Input
                 id="twitter"
@@ -95,6 +108,8 @@ export function WaitlistForm() {
               />
             </div>
           </div>
+
+          {error && <p className="text-sm text-red-500">{error}</p>}
 
           <Button
             type="submit"
@@ -112,7 +127,7 @@ export function WaitlistForm() {
           </Button>
 
           <p className="text-xs text-center text-secondary">
-            We'll never spam you. Unsubscribe at any time.
+            Unsubscribe at any time.
           </p>
         </form>
       </CardContent>
